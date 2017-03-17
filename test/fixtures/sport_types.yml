@@ -1,0 +1,14 @@
+# == Schema Information
+#
+# Table name: sport_types
+#
+#  id         :integer          not null, primary key
+#  name       :string           not null
+#  color      :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+sport_type:
+  name: Football
+  color: '#000'
