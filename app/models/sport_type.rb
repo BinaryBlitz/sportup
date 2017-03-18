@@ -12,6 +12,8 @@
 class SportType < ApplicationRecord
   COLOR_HEX_FORMAT = /\A#(?:[A-F0-9]{3}){1,2}\z/i
 
+  has_many :events, dependent: :destroy
+
   validates :name, presence: true
   validates :color, format: { with: COLOR_HEX_FORMAT }
 
