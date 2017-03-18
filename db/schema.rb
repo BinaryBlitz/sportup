@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170317212133) do
+ActiveRecord::Schema.define(version: 20170317215842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,26 @@ ActiveRecord::Schema.define(version: 20170317212133) do
     t.float    "longitude",  null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "name",                         null: false
+    t.datetime "starts_at",                    null: false
+    t.time     "ends_at",                      null: false
+    t.string   "address",                      null: false
+    t.float    "latitude",                     null: false
+    t.float    "longitude",                    null: false
+    t.integer  "user_limit",                   null: false
+    t.integer  "team_limit",                   null: false
+    t.boolean  "public",        default: true
+    t.text     "description",                  null: false
+    t.integer  "price",                        null: false
+    t.integer  "sport_type_id"
+    t.integer  "creator_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["creator_id"], name: "index_events_on_creator_id", using: :btree
+    t.index ["sport_type_id"], name: "index_events_on_sport_type_id", using: :btree
   end
 
   create_table "sport_types", force: :cascade do |t|
@@ -51,4 +71,6 @@ ActiveRecord::Schema.define(version: 20170317212133) do
     t.index ["token"], name: "index_verification_tokens_on_token", unique: true, using: :btree
   end
 
+  add_foreign_key "events", "sport_types"
+  add_foreign_key "events", "users", column: "creator_id"
 end
