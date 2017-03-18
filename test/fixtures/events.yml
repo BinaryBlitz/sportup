@@ -1,0 +1,35 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id            :integer          not null, primary key
+#  name          :string           not null
+#  starts_at     :datetime         not null
+#  ends_at       :time             not null
+#  address       :string           not null
+#  latitude      :float            not null
+#  longitude     :float            not null
+#  user_limit    :integer          not null
+#  team_limit    :integer          not null
+#  public        :boolean          default("true")
+#  description   :text             not null
+#  price         :integer          not null
+#  sport_type_id :integer
+#  creator_id    :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
+event:
+  name: Event
+  starts_at: <%= 1.day.from_now %>
+  ends_at: '23:59'
+  address: Address
+  latitude: 0.0
+  longitude: 0.0
+  user_limit: 2
+  team_limit: 2
+  description: Description
+  price: 1
+  sport_type: sport_type
+  creator: foo
