@@ -18,6 +18,8 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
   validates :phone_number, uniqueness: true
 
+  has_many :owned_events, dependent: :destroy, foreign_key: :creator_id, class_name: 'Event'
+
   has_secure_token :api_token
 
   def full_name
