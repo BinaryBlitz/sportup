@@ -7,8 +7,10 @@
 #  color      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  icon       :string           not null
 #
 
 sport_type:
   name: Football
   color: '#000'
+  icon: Icon

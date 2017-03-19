@@ -7,6 +7,7 @@
 #  color      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  icon       :string           not null
 #
 
 class SportType < ApplicationRecord
@@ -18,4 +19,6 @@ class SportType < ApplicationRecord
   validates :color, format: { with: COLOR_HEX_FORMAT }
 
   before_validation -> { color.downcase! if color.present? }
+
+  mount_uploader :icon, IconUploader
 end

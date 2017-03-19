@@ -7,6 +7,7 @@
 #  color      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  icon       :string           not null
 #
 
 require 'test_helper'
