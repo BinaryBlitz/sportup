@@ -24,6 +24,9 @@ class Event < ApplicationRecord
   belongs_to :creator, class_name: 'User'
   belongs_to :sport_type
 
+  has_many :memberships, dependent: :destroy
+  has_many :users, through: :memberships
+
   scope :on_date, -> (date) { where(starts_at: (date.beginning_of_day)..(date.end_of_day)) }
 
   validates :name, presence: true
