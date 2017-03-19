@@ -15,10 +15,13 @@
 class User < ApplicationRecord
   include Phonable
 
+  has_many :owned_events, dependent: :destroy, foreign_key: :creator_id, class_name: 'Event'
+  has_many :memberships, dependent: :destroy
+  has_many :events, through: :memberships
+
   validates :first_name, :last_name, presence: true
   validates :phone_number, uniqueness: true
 
-  has_many :owned_events, dependent: :destroy, foreign_key: :creator_id, class_name: 'Event'
 
   has_secure_token :api_token
 
