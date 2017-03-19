@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resource :user, only: [:show, :create, :update]
     resources :cities, only: [:index]
     resources :memberships, only: [:destroy]
+    resources :map_events, only: [:index]
     resources :events, only: [:show, :create, :update] do
       resources :memberships, only: [:index, :create], controller: 'event_memberships'
     end
