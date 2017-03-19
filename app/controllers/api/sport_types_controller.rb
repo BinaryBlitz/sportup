@@ -1,5 +1,5 @@
 class API::SportTypesController < API::APIController
   def index
-    @index = SportType.all
+    @sport_types = SportType.all
   end
 end

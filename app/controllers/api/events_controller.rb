@@ -1,9 +1,9 @@
 class API::EventsController < API::APIController
-  before_action :set_event, except: [:create]
+  before_action :set_event, except: [:create, :index]
   before_action :set_sport_type, only: [:index]
 
   def index
-    @index = @sport_type.events.on_date(params[:starts_at])
+    @events = @sport_type.events.on_date(params[:starts_at] || Date.today)
   end
 
   def show

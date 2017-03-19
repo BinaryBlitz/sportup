@@ -1,5 +1,5 @@
 class API::CitiesController < API::APIController
   def index
-    @index = City.all
+    @cities = City.all
   end
 end
