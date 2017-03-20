@@ -1,3 +1,3 @@
 json.extract! event,
-              :id, :name, :starts_at, :ends_at, :address, :latitude, :longitude,
-              :user_limit, :team_limit, :description, :public, :price, :sport_type_id
+              :id, :name, :starts_at, :ends_at, :address,
+              :user_limit, :team_limit, :public, :price
