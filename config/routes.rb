@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :events, only: [:show, :create, :update] do
       resources :memberships, only: [:index, :create], controller: 'event_memberships'
       resources :invites, only: [:create]
+      resources :teams, except: [:new, :show, :edit], shallow: true
     end
     resources :sport_types, only: [:index] do
       resources :events, only: [:index]
