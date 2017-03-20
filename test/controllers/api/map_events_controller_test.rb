@@ -6,7 +6,7 @@ class API::MapEventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should get index' do
-    get api_map_events_path(api_token: api_token)
+    get api_map_events_path
     assert_response :success
   end
 end

@@ -3,6 +3,12 @@ require 'test_helper'
 class API::EventsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @event = events(:event)
+    @sport_type = @event.sport_type
+  end
+
+  test 'should get index' do
+    get api_sport_type_events_url(@sport_type)
+    assert_response :success
   end
 
   test 'should get show' do
