@@ -19,6 +19,7 @@ class User < ApplicationRecord
   has_many :memberships, dependent: :destroy
   has_many :events, through: :memberships
   has_many :invites, dependent: :destroy
+  has_many :teams, dependent: :destroy
 
   validates :first_name, :last_name, presence: true
   validates :phone_number, uniqueness: true
