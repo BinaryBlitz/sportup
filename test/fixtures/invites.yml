@@ -1,0 +1,15 @@
+# == Schema Information
+#
+# Table name: invites
+#
+#  id         :integer          not null, primary key
+#  event_id   :integer
+#  user_id    :integer
+#  accepted   :boolean
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+invite:
+  user: baz
+  event: event
