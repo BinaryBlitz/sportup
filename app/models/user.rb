@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_many :owned_events, dependent: :destroy, foreign_key: :creator_id, class_name: 'Event'
   has_many :memberships, dependent: :destroy
   has_many :events, through: :memberships
+  has_many :invites, dependent: :destroy
 
   validates :first_name, :last_name, presence: true
   validates :phone_number, uniqueness: true
