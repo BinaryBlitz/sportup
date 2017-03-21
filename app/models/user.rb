@@ -10,6 +10,7 @@
 #  api_token    :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  votes_count  :integer          default("0")
 #
 
 class User < ApplicationRecord
@@ -20,16 +21,17 @@ class User < ApplicationRecord
   has_many :events, through: :memberships
   has_many :invites, dependent: :destroy
   has_many :teams, dependent: :destroy
+  has_many :votes, dependent: :destroy, foreign_key: :voted_user_id
+  has_many :voted_users, through: :votes
 
   validates :first_name, :last_name, presence: true
   validates :phone_number, uniqueness: true
 
-
   has_secure_token :api_token
+
+  mount_uploader :avatar, AvatarUploader
 
   def full_name
     "#{first_name} #{last_name}"
   end
-
-  mount_uploader :avatar, AvatarUploader
 end
