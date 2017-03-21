@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20170321192331) do
     t.integer  "creator_id"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.string   "password"
     t.index ["creator_id"], name: "index_events_on_creator_id", using: :btree
     t.index ["sport_type_id"], name: "index_events_on_sport_type_id", using: :btree
   end

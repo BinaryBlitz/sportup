@@ -18,6 +18,7 @@
 #  creator_id    :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  password      :string
 #
 
 require 'test_helper'
