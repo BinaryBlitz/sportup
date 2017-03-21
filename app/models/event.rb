@@ -22,7 +22,7 @@
 
 class Event < ApplicationRecord
   belongs_to :creator, class_name: 'User'
-  belongs_to :sport_type
+  belongs_to :sport_type, counter_cache: true
 
   has_many :memberships, dependent: :destroy
   has_many :users, through: :memberships
