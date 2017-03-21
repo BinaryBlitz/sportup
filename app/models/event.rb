@@ -45,7 +45,8 @@ class Event < ApplicationRecord
   validates :team_limit, numericality: { greater_than: 1 }
   validates :price, numericality: { greater_than: 0 }
 
-  def verify(password)
-    public? ? true : self.password == password
+  def verify(user, password)
+    return true if public? || user == creator
+    self.password == password
   end
 end

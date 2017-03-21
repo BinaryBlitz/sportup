@@ -9,6 +9,7 @@ class API::EventsController < API::APIController
   end
 
   def show
+    return head :forbidden unless @event.verify(current_user, params[:password])
   end
 
   def create
