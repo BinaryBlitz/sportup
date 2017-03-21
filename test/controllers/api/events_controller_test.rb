@@ -3,6 +3,8 @@ require 'test_helper'
 class API::EventsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @event = events(:event)
+    @private_event = events(:private_event)
+    @unknown_user = users(:baz)
     @sport_type = @event.sport_type
   end
 
@@ -31,5 +33,22 @@ class API::EventsControllerTest < ActionDispatch::IntegrationTest
     patch api_event_path(@event, api_token: api_token), params: { event: { name: new_name } }
     assert_response :ok
     assert_equal new_name, @event.reload.name
+  end
+
+  test 'creator should get show without password' do
+    get api_event_path(@private_event, api_token: api_token)
+    assert_response :success
+  end
+
+  test 'should not get show without password' do
+    get api_event_path(@private_event, api_token: @unknown_user.api_token)
+    assert_response :forbidden
+  end
+
+  test 'should get show with password' do
+    get api_event_path(
+      @private_event, api_token: @unknown_user.api_token, password: @private_event.password
+    )
+    assert_response :success
   end
 end

@@ -18,6 +18,7 @@
 #  creator_id    :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  password      :string
 #
 
 event:
@@ -31,5 +32,20 @@ event:
   team_limit: 2
   description: Description
   price: 1
+  sport_type: sport_type
+  creator: foo
+private_event:
+  name: Event
+  starts_at: <%= 1.day.from_now %>
+  ends_at: '23:59'
+  address: Address
+  latitude: 0.0
+  longitude: 0.0
+  user_limit: 2
+  team_limit: 2
+  description: Description
+  price: 1
+  public: false
+  password: '1234'
   sport_type: sport_type
   creator: foo
