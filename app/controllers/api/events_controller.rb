@@ -2,9 +2,10 @@ class API::EventsController < API::APIController
   skip_before_action :restrict_access!, only: [:index]
   before_action :set_event, except: [:create, :index]
   before_action :set_sport_type, only: [:index]
+  before_action :set_date, only: [:index]
 
   def index
-    @events = @sport_type.events.on_date(params[:starts_at] || Date.today)
+    @events = @sport_type.events.on_date(@date)
   end
 
   def show
@@ -36,6 +37,10 @@ class API::EventsController < API::APIController
 
   def set_sport_type
     @sport_type = SportType.find(params[:sport_type_id])
+  end
+
+  def set_date
+    @date = params[:date].present? ? params[:date].to_date : Date.today
   end
 
   def event_params
