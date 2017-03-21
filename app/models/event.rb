@@ -18,6 +18,7 @@
 #  creator_id    :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  password      :string
 #
 
 class Event < ApplicationRecord
@@ -43,4 +44,8 @@ class Event < ApplicationRecord
   validates :user_limit, numericality: { greater_than: 1 }
   validates :team_limit, numericality: { greater_than: 1 }
   validates :price, numericality: { greater_than: 0 }
+
+  def verify(password)
+    public? ? true : self.password == password
+  end
 end
