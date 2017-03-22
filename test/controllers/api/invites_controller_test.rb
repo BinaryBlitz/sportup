@@ -16,7 +16,7 @@ class API::InvitesControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference 'Invite.count' do
       post api_event_invites_url(@event, api_token: api_token), params: {
-        invite: @invite.attributes
+        invites: [@invite.attributes]
       }
     end
 

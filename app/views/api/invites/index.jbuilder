@@ -1,7 +1,7 @@
 json.array! @invites do |invite|
-  json.extract! invite, :id
+  json.partial! 'api/invites/invite', invite: invite
 
-  json.event do
-    json.partial! 'api/events/event_detail', event: invite.event
+  json.user do
+    json.partial! 'api/users/user', user: invite.user
   end
 end

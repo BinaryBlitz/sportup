@@ -7,12 +7,15 @@ class API::InvitesController < API::APIController
   end
 
   def create
-    @invite = @event.invites.build(invite_params)
+    @invites = @event.invites.build(invites_params[:invites])
 
-    if @invite.save
-      render :show, status: :created
+    invalid_invite = @invites.find(&:invalid?)
+
+    if invalid_invite.present?
+      render json: invalid_invite.errors, status: 422
     else
-      render json: @invite.errors, status: 422
+      @invites.each(&:save)
+      render :index, status: :created
     end
   end
 
@@ -36,7 +39,7 @@ class API::InvitesController < API::APIController
     @invite = Invite.find(params[:id])
   end
 
-  def invite_params
-    params.require(:invite).permit(:user_id)
+  def invites_params
+    params.permit(invites: [:user_id])
   end
 end
