@@ -31,6 +31,7 @@ class Event < ApplicationRecord
   has_many :teams, dependent: :destroy
   has_many :voted_users, through: :votes
   has_many :votes, dependent: :destroy
+  has_many :reports, dependent: :destroy
 
   scope :on_date, -> (date) { where(starts_at: (date.beginning_of_day)..(date.end_of_day)) }
 
