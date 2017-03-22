@@ -2,7 +2,7 @@ city = City.create!(name: 'City', latitude: 0.0, longitude: 0.0)
 
 image = File.open(Rails.root.join('test', 'fixtures', 'files', 'blank.jpg'))
 
-sport_type = SportType.create!(name: 'Football', color: '#fff', icon: image)
+sport_type = SportType.create!(name: 'Football', color: '#000000', icon: image)
 
 user = User.create!(
   first_name: 'Foo', last_name: 'Bar', phone_number: '+79998887766'
