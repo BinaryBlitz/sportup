@@ -1,0 +1,18 @@
+# == Schema Information
+#
+# Table name: reports
+#
+#  id               :integer          not null, primary key
+#  content          :string
+#  violation        :boolean          default("false")
+#  event_id         :integer
+#  user_id          :integer
+#  reported_user_id :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
+report:
+  user: foo
+  event: event
+  reported_user: baz
