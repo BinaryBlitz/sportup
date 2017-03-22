@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :invites, only: [:create]
       resources :teams, except: [:new, :show, :edit], shallow: true
       resources :votes, only: [:create]
+      resources :reports, only: [:index, :create]
     end
     resources :sport_types, only: [:index] do
       resources :events, only: [:index]
