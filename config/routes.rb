@@ -14,7 +14,6 @@ Rails.application.routes.draw do
     end
     resources :sport_types, only: [:index] do
       resources :events, only: [:index]
-      resources :map_events, only: [:index]
     end
   end
 end
