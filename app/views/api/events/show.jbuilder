@@ -1,6 +1,6 @@
 json.extract! @event,
               :id, :name, :starts_at, :ends_at, :address, :latitude, :longitude,
-              :user_limit, :team_limit, :description, :price, :password
+              :user_limit, :team_limit, :description, :price, :password, :memberships_count
 
 json.creator do
   json.partial! 'api/users/user', user: @event.creator

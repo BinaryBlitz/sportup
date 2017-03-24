@@ -11,7 +11,7 @@
 
 class Membership < ApplicationRecord
   belongs_to :user
-  belongs_to :event
+  belongs_to :event, counter_cache: true
 
   validates :user, presence: true
   validates :event, presence: true, uniqueness: { scope: :user }
