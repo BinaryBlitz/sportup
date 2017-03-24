@@ -23,6 +23,8 @@
 #
 
 class Event < ApplicationRecord
+  after_create :attend
+
   belongs_to :creator, class_name: 'User'
   belongs_to :sport_type, counter_cache: true
 
@@ -50,5 +52,11 @@ class Event < ApplicationRecord
   def verify(user, password)
     return true if public? || user == creator
     self.password == password
+  end
+
+  private
+
+  def attend
+    creator.events << self
   end
 end
