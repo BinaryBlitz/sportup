@@ -12,6 +12,7 @@
 #  updated_at       :datetime         not null
 #  votes_count      :integer          default("0")
 #  violations_count :integer          default("0")
+#  balance          :integer          default("0")
 #
 
 require 'test_helper'
@@ -49,5 +50,13 @@ class UserTest < ActiveSupport::TestCase
 
     assert @user.valid?
     assert_equal Phonelib.parse(phone_number).e164, @user.phone_number
+  end
+
+  test 'balance is positive' do
+    @user.balance = -1
+    assert @user.invalid?
+
+    @user.balance = 0
+    assert @user.valid?
   end
 end
