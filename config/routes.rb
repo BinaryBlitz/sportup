@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       resources :invites, only: [:create]
       resources :votes, only: [:create]
       resources :reports, only: [:index, :create]
-      resources :teams, only: [:create, :update]
+      resources :messages, only: [:index, :create]
     end
 
     resources :cities, only: [:index] do
