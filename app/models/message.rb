@@ -15,4 +15,6 @@ class Message < ApplicationRecord
   belongs_to :event
 
   validates :content, presence: true
+
+  after_commit { MessageBroadcastJob.perform_later self }
 end
