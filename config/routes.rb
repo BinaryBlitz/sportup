@@ -21,5 +21,7 @@ Rails.application.routes.draw do
         resources :events, only: [:index]
       end
     end
+
+    resources :purchases, only: [:index, :create]
   end
 end
