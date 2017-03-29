@@ -26,6 +26,7 @@ class User < ApplicationRecord
   has_many :voted_users, through: :votes
   has_many :reports, dependent: :destroy, foreign_key: :reported_user_id
   has_many :messages, dependent: :destroy
+  has_many :purchases, dependent: :destroy
 
   validates :first_name, :last_name, presence: true
   validates :phone_number, uniqueness: true
@@ -41,5 +42,9 @@ class User < ApplicationRecord
 
   def events_count
     events.past_events.count
+  end
+
+  def add_balance(value)
+    update_column(:balance, balance + value)
   end
 end
