@@ -18,6 +18,8 @@ class Invite < ApplicationRecord
   validate :not_member
   validate :event_date_valid, on: :create
 
+  scope :unreviewed, -> { where(accepted: nil) }
+
   def accept
     if event.users.include?(user)
       destroy

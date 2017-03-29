@@ -1,1 +1,1 @@
-json.extract! invite, :id, :user_id, :event_id
+json.extract! invite, :id, :user_id, :event_id, :accepted

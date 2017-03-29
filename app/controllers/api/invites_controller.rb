@@ -3,7 +3,7 @@ class API::InvitesController < API::APIController
   before_action :set_invite, only: [:update, :destroy]
 
   def index
-    @invites = current_user.invites
+    @invites = current_user.invites.unreviewed
   end
 
   def create
