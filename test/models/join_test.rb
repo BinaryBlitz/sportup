@@ -1,22 +1,22 @@
 # == Schema Information
 #
-# Table name: teams
+# Table name: joins
 #
 #  id         :integer          not null, primary key
-#  event_id   :integer
-#  number     :integer          not null
+#  user_id    :integer
+#  team_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 require 'test_helper'
 
-class TeamTest < ActiveSupport::TestCase
+class JoinTest < ActiveSupport::TestCase
   setup do
-    @team = teams(:team)
+    @join = joins(:join)
   end
 
   test 'valid' do
-    assert @team.valid?
+    assert @join.valid?
   end
 end

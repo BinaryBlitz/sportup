@@ -32,6 +32,7 @@ class Event < ApplicationRecord
   has_many :users, through: :memberships
   has_many :invites, dependent: :destroy
   has_many :teams, dependent: :destroy
+  has_many :joins, through: :teams
   has_many :voted_users, through: :votes
   has_many :votes, dependent: :destroy
   has_many :reports, dependent: :destroy
@@ -49,6 +50,8 @@ class Event < ApplicationRecord
   validates :team_limit, numericality: { greater_than: 1 }
   validates :price, numericality: { greater_than: 0 }
 
+  after_create :generate_teams
+
   def verify(user, password)
     return true if public? || user == creator
     self.password == password
@@ -58,5 +61,9 @@ class Event < ApplicationRecord
 
   def attend
     creator.events << self
+  end
+
+  def generate_teams
+    teams.create((0...team_limit).map.with_index(1) { |_,i| { number: i } })
   end
 end
