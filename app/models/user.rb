@@ -27,6 +27,8 @@ class User < ApplicationRecord
   has_many :votes, dependent: :destroy, foreign_key: :voted_user_id
   has_many :voted_users, through: :votes
   has_many :reports, dependent: :destroy
+  has_many :teams, through: :joins
+  has_many :joins, dependent: :destroy
 
   validates :first_name, :last_name, presence: true
   validates :phone_number, uniqueness: true
