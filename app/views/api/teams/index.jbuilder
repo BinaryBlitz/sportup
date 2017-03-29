@@ -1,7 +1,7 @@
 json.array!(@teams) do |team|
-  json.extract! team, :id, :created_at
+  json.extract! team, :id, :number
 
-  json.user do
-    json.partial! 'api/users/user', user: team.user
+  json.users team.users do |user|
+    json.partial! 'api/users/user', user: user
   end
 end
