@@ -17,7 +17,6 @@
 class User < ApplicationRecord
   include Phonable
 
-  after_save :update_counter_cache
 
   has_many :owned_events, dependent: :destroy, foreign_key: :creator_id, class_name: 'Event'
   has_many :memberships, dependent: :destroy
@@ -26,7 +25,7 @@ class User < ApplicationRecord
   has_many :teams, dependent: :destroy
   has_many :votes, dependent: :destroy, foreign_key: :voted_user_id
   has_many :voted_users, through: :votes
-  has_many :reports, dependent: :destroy
+  has_many :reports, dependent: :destroy, foreign_key: :reported_user_id
   has_many :teams, through: :joins
   has_many :joins, dependent: :destroy
 
@@ -39,9 +38,5 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
-  end
-
-  def update_counter_cache
-    update_column(:violations_count, reports.violated.count)
   end
 end
