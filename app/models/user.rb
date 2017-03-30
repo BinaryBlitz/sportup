@@ -17,17 +17,13 @@
 class User < ApplicationRecord
   include Phonable
 
-
   has_many :owned_events, dependent: :destroy, foreign_key: :creator_id, class_name: 'Event'
   has_many :memberships, dependent: :destroy
   has_many :events, through: :memberships
   has_many :invites, dependent: :destroy
-  has_many :teams, dependent: :destroy
   has_many :votes, dependent: :destroy, foreign_key: :voted_user_id
   has_many :voted_users, through: :votes
   has_many :reports, dependent: :destroy, foreign_key: :reported_user_id
-  has_many :teams, through: :joins
-  has_many :joins, dependent: :destroy
 
   validates :first_name, :last_name, presence: true
   validates :phone_number, uniqueness: true

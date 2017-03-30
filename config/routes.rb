@@ -9,10 +9,6 @@ Rails.application.routes.draw do
       resources :memberships, only: [:index, :create], controller: 'event_memberships'
       resources :invites, only: [:create]
 
-      resources :teams, only: [:index], shallow: true do
-        resources :joins, only: [:create, :destroy]
-      end
-
       resources :votes, only: [:create]
       resources :reports, only: [:index, :create]
     end
