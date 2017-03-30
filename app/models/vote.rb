@@ -18,4 +18,24 @@ class Vote < ApplicationRecord
   validates :user, presence: true
   validates :voted_user, presence: true
   validates :event, presence: true, uniqueness: { scope: :user }
+  validate :user_membership
+  validate :voted_user_membership
+  validate :not_self
+
+  private
+
+  def user_membership
+    return if event.users.include?(user)
+    errors.add(:user, 'is not a member')
+  end
+
+  def voted_user_membership
+    return if event.users.include?(voted_user)
+    errors.add(:voted_user, 'is not a member')
+  end
+
+  def not_self
+    return unless user == voted_user
+    errors.add(:user, "can't vote for yourself")
+  end
 end
