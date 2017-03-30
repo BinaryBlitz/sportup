@@ -8,9 +8,10 @@ Rails.application.routes.draw do
     resources :events, only: [:show, :create, :update] do
       resources :memberships, only: [:index, :create], controller: 'event_memberships'
       resources :invites, only: [:create]
-
       resources :votes, only: [:create]
       resources :reports, only: [:index, :create]
+      put 'join_team', on: :member
+      put 'leave_team', on: :member
     end
 
     resources :cities, only: [:index] do

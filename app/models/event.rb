@@ -55,6 +55,10 @@ class Event < ApplicationRecord
     self.password == password
   end
 
+  def member(user)
+    memberships.where(user: user).first
+  end
+
   private
 
   def attend

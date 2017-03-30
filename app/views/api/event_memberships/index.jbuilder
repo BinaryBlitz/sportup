@@ -1,5 +1,5 @@
 json.array!(@memberships) do |membership|
-  json.extract! membership, :id, :event_id
+  json.extract! membership, :id, :event_id, :team_number
 
   json.user do
     json.partial! 'api/users/user', user: membership.user
