@@ -2,10 +2,11 @@ class API::EventsController < API::APIController
   skip_before_action :restrict_access!, only: [:index]
   before_action :set_event, except: [:create, :index]
   before_action :set_sport_type, only: [:index]
+  before_action :set_city, only: [:index]
   before_action :set_date, only: [:index]
 
   def index
-    @events = @sport_type.events.on_date(@date)
+    @events = @sport_type.events.where(city: @city).on_date(@date)
   end
 
   def show
@@ -40,6 +41,10 @@ class API::EventsController < API::APIController
     @sport_type = SportType.find(params[:sport_type_id])
   end
 
+  def set_city
+    @city = City.find(params[:city_id])
+  end
+
   def set_date
     @date = params[:date].present? ? params[:date].to_date : Date.today
   end
@@ -49,7 +54,7 @@ class API::EventsController < API::APIController
       .require(:event)
       .permit(
         :name, :starts_at, :ends_at, :address, :description, :latitude,
-        :longitude, :user_limit, :team_limit, :price, :sport_type_id
+        :longitude, :user_limit, :team_limit, :price, :sport_type_id, :city_id
       )
   end
 end

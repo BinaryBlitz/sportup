@@ -21,5 +21,7 @@ class SportType < ApplicationRecord
 
   before_validation -> { color.downcase! if color.present? }
 
+  scope :by_city, -> (city) { joins(:events).where('events.city_id': city.id).distinct }
+
   mount_uploader :icon, IconUploader
 end

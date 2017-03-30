@@ -6,10 +6,11 @@ class API::EventsControllerTest < ActionDispatch::IntegrationTest
     @private_event = events(:private_event)
     @unknown_user = users(:baz)
     @sport_type = @event.sport_type
+    @city = @event.city
   end
 
   test 'should get index' do
-    get api_sport_type_events_url(@sport_type)
+    get api_city_sport_type_events_url(@city, @sport_type)
     assert_response :success
   end
 

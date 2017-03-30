@@ -11,6 +11,8 @@
 #
 
 class City < ApplicationRecord
+  has_many :events, dependent: :destroy
+
   validates :name, presence: true
   validates :latitude, inclusion: { in: -90..90 }
   validates :longitude, inclusion: { in: -180..180 }
