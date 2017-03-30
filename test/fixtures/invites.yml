@@ -11,5 +11,5 @@
 #
 
 invite:
-  user: baz
+  user: quux
   event: event

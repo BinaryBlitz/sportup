@@ -27,3 +27,10 @@ baz:
   phone_number: "+79991112233"
   avatar: Avatar
   api_token: <%= SecureRandom.hex %>
+
+quux:
+  first_name: Quux
+  last_name: Quuux
+  phone_number: "+79994445566"
+  avatar: Avatar
+  api_token: <%= SecureRandom.hex %>

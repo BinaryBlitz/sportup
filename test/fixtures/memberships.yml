@@ -12,3 +12,7 @@
 membership:
   user: foo
   event: event
+
+membership_two:
+  user: baz
+  event: event
