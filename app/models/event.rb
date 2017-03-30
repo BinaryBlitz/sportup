@@ -20,13 +20,15 @@
 #  updated_at        :datetime         not null
 #  password          :string
 #  memberships_count :integer          default("0")
+#  city_id           :integer
 #
 
 class Event < ApplicationRecord
   after_create :attend
 
   belongs_to :creator, class_name: 'User'
-  belongs_to :sport_type, counter_cache: true
+  belongs_to :sport_type
+  belongs_to :city
 
   has_many :memberships, dependent: :destroy
   has_many :users, through: :memberships
