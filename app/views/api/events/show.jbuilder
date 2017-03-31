@@ -1,8 +1,4 @@
-json.extract! @event,
-              :id, :name, :starts_at, :ends_at, :address, :latitude, :longitude,
-              :user_limit, :team_limit, :description, :price, :password
-
-json.user_count @event.users.count
+json.partial! 'event', event: @event
 
 json.creator do
   json.partial! 'api/users/user', user: @event.creator

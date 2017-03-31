@@ -1,7 +1,7 @@
-json.extract! event, :id, :name, :starts_at, :ends_at
+json.partial! 'api/events/event', event: event
 
 json.sport_type do
-  json.extract! event.sport_type, :id, :color, :icon_url
+  json.extract! event.sport_type, :id, :name, :color, :icon_url
 end
 
 json.creator do
