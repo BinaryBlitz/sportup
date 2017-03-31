@@ -48,7 +48,7 @@ class Event < ApplicationRecord
   validates :longitude, inclusion: { in: -180..180 }
   validates :user_limit, numericality: { greater_than: 1 }
   validates :team_limit, numericality: { greater_than: 1 }
-  validates :price, numericality: { greater_than: 0 }
+  validates :price, numericality: { greater_than_or_equal_to: 0 }
 
   def verify(user, password)
     return true if public? || user == creator
