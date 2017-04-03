@@ -38,6 +38,7 @@ class Event < ApplicationRecord
   has_many :reports, dependent: :destroy
 
   scope :on_date, -> (date) { where(starts_at: (date.beginning_of_day)..(date.end_of_day)) }
+  scope :by_city, -> (city) { where(city: city).on_date(Date.today) }
 
   validates :name, presence: true
   validates :starts_at, presence: true
