@@ -39,11 +39,11 @@ class EventTest < ActiveSupport::TestCase
     assert @event.invalid?
   end
 
-  test 'positive price' do
+  test 'positive or zero price' do
     @event.price = -1
     assert @event.invalid?
 
     @event.price = 0
-    assert @event.invalid?
+    assert @event.valid?
   end
 end
