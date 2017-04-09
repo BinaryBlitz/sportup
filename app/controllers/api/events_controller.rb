@@ -31,16 +31,6 @@ class API::EventsController < API::APIController
     end
   end
 
-  def join_team
-    @event.member(current_user).join(params[:team_number])
-    head :ok
-  end
-
-  def leave_team
-    @event.member(current_user).leave
-    head :ok
-  end
-
   private
 
   def set_event

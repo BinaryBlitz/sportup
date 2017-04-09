@@ -10,8 +10,7 @@ Rails.application.routes.draw do
       resources :invites, only: [:create]
       resources :votes, only: [:create]
       resources :reports, only: [:index, :create]
-      put 'join_team', on: :member
-      put 'leave_team', on: :member
+      resources :teams, only: [:create, :update]
     end
 
     resources :cities, only: [:index] do
