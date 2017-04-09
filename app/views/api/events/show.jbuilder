@@ -6,5 +6,5 @@ end
 
 json.membership do
   membership = @event.memberships.find_by(user: current_user)
-  json.extract! membership, :id, :event_id, :user_id if membership
+  json.partial! 'api/memberships/membership', membership: membership if membership
 end
