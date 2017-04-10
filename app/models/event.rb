@@ -50,6 +50,7 @@ class Event < ApplicationRecord
   validates :user_limit, numericality: { greater_than: 1 }
   validates :team_limit, numericality: { greater_than: 1 }
   validates :price, numericality: { greater_than_or_equal_to: 0 }
+  validate :starts_before_ends
 
   def verify(user, password)
     return true if public? || user == creator
@@ -64,5 +65,10 @@ class Event < ApplicationRecord
 
   def attend
     creator.events << self
+  end
+
+  def starts_before_ends
+    return unless starts_at > starts_at.to_date + ends_at.seconds_since_midnight.seconds
+    errors.add(:event, 'should starts before ends')
   end
 end
