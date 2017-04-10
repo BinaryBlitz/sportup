@@ -53,7 +53,7 @@ class Event < ApplicationRecord
   validate :starts_before_ends
 
   def verify(user, password)
-    return true if public? || user == creator
+    return true if public? || user == creator || member(user)
     self.password == password
   end
 
