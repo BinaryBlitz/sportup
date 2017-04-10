@@ -39,6 +39,7 @@ class Event < ApplicationRecord
 
   scope :on_date, -> (date) { where(starts_at: (date.beginning_of_day)..(date.end_of_day)) }
   scope :by_city, -> (city) { where(city: city).on_date(Date.today) }
+  scope :past_events, -> { where('starts_at + ends_at < ?', Time.zone.now) }
 
   validates :name, presence: true
   validates :starts_at, presence: true
@@ -61,6 +62,10 @@ class Event < ApplicationRecord
     memberships.where(user: user).first
   end
 
+  def datetime_of_ending
+    starts_at.to_date + ends_at.seconds_since_midnight.seconds
+  end
+
   private
 
   def attend
@@ -68,7 +73,7 @@ class Event < ApplicationRecord
   end
 
   def starts_before_ends
-    return unless starts_at > starts_at.to_date + ends_at.seconds_since_midnight.seconds
+    return unless starts_at > datetime_of_ending
     errors.add(:event, 'should starts before ends')
   end
 end

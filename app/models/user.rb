@@ -35,4 +35,8 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def events_count
+    events.past_events.count
+  end
 end
