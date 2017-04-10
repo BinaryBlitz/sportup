@@ -6,6 +6,8 @@ class API::EventMembershipsController < API::APIController
   end
 
   def create
+    return head :forbidden unless @event.verify(current_user, params[:password])
+
     @membership = @event.memberships.build(user: current_user)
 
     if @membership.save
@@ -19,9 +21,5 @@ class API::EventMembershipsController < API::APIController
 
   def set_event
     @event = Event.find(params[:event_id])
-  end
-
-  def membership_params
-    params.require(:membership).permit(:event_id)
   end
 end
