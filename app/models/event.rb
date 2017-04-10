@@ -39,7 +39,7 @@ class Event < ApplicationRecord
 
   scope :on_date, -> (date) { where(starts_at: (date.beginning_of_day)..(date.end_of_day)) }
   scope :by_city, -> (city) { where(city: city).on_date(Date.today) }
-  scope :past_events, -> { where('starts_at + ends_at < ?', Time.zone.now) }
+  scope :past_events, -> { where('cast(starts_at as date) + ends_at < ?', Time.zone.now) }
 
   validates :name, presence: true
   validates :starts_at, presence: true
