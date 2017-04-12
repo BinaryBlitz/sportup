@@ -35,6 +35,7 @@ gem 'phonelib', '~> 0.6'
 gem 'httparty', '~> 0.14'
 
 gem 'carrierwave', '~> 1.0'
+gem 'carrierwave-base64'
 gem 'mini_magick', '~> 4.6'
 
 # Use Capistrano for deployment

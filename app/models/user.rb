@@ -30,7 +30,7 @@ class User < ApplicationRecord
 
   has_secure_token :api_token
 
-  mount_uploader :avatar, AvatarUploader
+  mount_base64_uploader :avatar, AvatarUploader
 
   def full_name
     "#{first_name} #{last_name}"
