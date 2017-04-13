@@ -36,6 +36,14 @@ class API::EventsControllerTest < ActionDispatch::IntegrationTest
     assert_equal new_name, @event.reload.name
   end
 
+  test 'should destroy event' do
+    assert_difference 'Event.count', -1 do
+      delete api_event_url(@event, api_token: api_token)
+    end
+
+    assert_response :no_content
+  end
+
   test 'creator should get show without password' do
     get api_event_path(@private_event, api_token: api_token)
     assert_response :success

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :memberships, only: [:index, :destroy]
     resources :invites, only: [:index, :update, :destroy]
 
-    resources :events, only: [:show, :create, :update] do
+    resources :events, except: [:index, :new, :edit] do
       resources :memberships, only: [:index, :create], controller: 'event_memberships'
       resources :invites, only: [:create]
       resources :votes, only: [:create]

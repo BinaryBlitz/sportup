@@ -29,6 +29,11 @@ class API::EventsController < API::APIController
     end
   end
 
+  def destroy
+    @event.destroy
+    head :no_content
+  end
+
   private
 
   def set_event
