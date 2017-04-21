@@ -38,6 +38,9 @@ gem 'carrierwave', '~> 1.0'
 gem 'carrierwave-base64'
 gem 'mini_magick', '~> 4.6'
 
+gem 'venice'
+gem 'google-api-client'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

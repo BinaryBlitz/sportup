@@ -75,6 +75,14 @@ ActiveRecord::Schema.define(version: 20170330211522) do
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_messages_on_event_id", using: :btree
     t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
+
+  create_table "purchases", force: :cascade do |t|
+    t.json     "receipt",    null: false
+    t.string   "platform"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_purchases_on_user_id", using: :btree
   end
 
   create_table "reports", force: :cascade do |t|
@@ -108,6 +116,7 @@ ActiveRecord::Schema.define(version: 20170330211522) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.integer  "votes_count",      default: 0
+    t.integer  "balance",          default: 0
     t.integer  "violations_count", default: 0
     t.index ["api_token"], name: "index_users_on_api_token", unique: true, using: :btree
   end
@@ -142,6 +151,7 @@ ActiveRecord::Schema.define(version: 20170330211522) do
   add_foreign_key "memberships", "users"
   add_foreign_key "messages", "events"
   add_foreign_key "messages", "users"
+  add_foreign_key "purchases", "users"
   add_foreign_key "reports", "events"
   add_foreign_key "reports", "users"
   add_foreign_key "reports", "users", column: "reported_user_id"

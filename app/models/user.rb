@@ -12,6 +12,7 @@
 #  updated_at       :datetime         not null
 #  votes_count      :integer          default("0")
 #  violations_count :integer          default("0")
+#  balance          :integer          default("0")
 #
 
 class User < ApplicationRecord
@@ -25,9 +26,11 @@ class User < ApplicationRecord
   has_many :voted_users, through: :votes
   has_many :reports, dependent: :destroy, foreign_key: :reported_user_id
   has_many :messages, dependent: :destroy
+  has_many :purchases, dependent: :destroy
 
   validates :first_name, :last_name, presence: true
   validates :phone_number, uniqueness: true
+  validates :balance, numericality: { greater_than_or_equal_to: 0 }
 
   has_secure_token :api_token
 
@@ -39,5 +42,9 @@ class User < ApplicationRecord
 
   def events_count
     events.past_events.count
+  end
+
+  def add_balance(value)
+    update_column(:balance, balance + value)
   end
 end
