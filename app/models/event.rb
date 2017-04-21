@@ -24,6 +24,8 @@
 #
 
 class Event < ApplicationRecord
+  SEARCH_RADIUS = 30
+
   after_create :attend
 
   belongs_to :creator, class_name: 'User'
@@ -38,9 +40,12 @@ class Event < ApplicationRecord
   has_many :reports, dependent: :destroy
   has_many :messages, dependent: :destroy
 
+  geocoded_by :address
+
   scope :on_date, -> (date) { where(starts_at: (date.beginning_of_day)..(date.end_of_day)) }
   scope :by_city, -> (city) { where(city: city).on_date(Date.today) }
   scope :past_events, -> { where('cast(starts_at as date) + ends_at < ?', Time.zone.now) }
+  scope :by_location, -> (location) { near(location, SEARCH_RADIUS, units: :km) }
 
   validates :name, presence: true
   validates :starts_at, presence: true

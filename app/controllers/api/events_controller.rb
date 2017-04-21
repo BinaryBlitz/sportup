@@ -1,10 +1,10 @@
 class API::EventsController < API::APIController
   skip_before_action :restrict_access!, only: [:index]
   before_action :set_event, except: [:create, :index]
-  before_action :set_sport_type, :set_city, :set_date, :restrict_access, only: [:index]
+  before_action :set_sport_type, :set_date, :restrict_access, only: [:index]
 
   def index
-    @events = @sport_type.events.where(city: @city).on_date(@date)
+    @events = @sport_type.events.on_date(@date).by_location(location)
   end
 
   def show
@@ -44,12 +44,12 @@ class API::EventsController < API::APIController
     @sport_type = SportType.find(params[:sport_type_id])
   end
 
-  def set_city
-    @city = City.find(params[:city_id])
-  end
-
   def set_date
     @date = params[:date].present? ? params[:date].to_date : Date.today
+  end
+
+  def location
+    [params[:latitude].to_f, params[:longitude].to_f]
   end
 
   def event_params
