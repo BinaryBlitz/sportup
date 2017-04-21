@@ -16,10 +16,8 @@ Rails.application.routes.draw do
       resources :messages, only: [:index, :create]
     end
 
-    resources :cities, only: [:index] do
-      resources :sport_types, only: [:index] do
-        resources :events, only: [:index]
-      end
+    resources :sport_types, only: [:index] do
+      resources :events, only: [:index]
     end
   end
 end
