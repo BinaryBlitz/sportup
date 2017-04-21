@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount ActionCable.server, at: '/cable'
+
   namespace :api do
     resources :verification_tokens, only: [:create, :update], param: :token
     resource :user, only: [:show, :create, :update]
@@ -11,6 +13,7 @@ Rails.application.routes.draw do
       resources :votes, only: [:create]
       resources :reports, only: [:index, :create]
       resources :teams, only: [:create, :update]
+      resources :messages, only: [:index, :create]
     end
 
     resources :cities, only: [:index] do

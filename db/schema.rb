@@ -67,6 +67,16 @@ ActiveRecord::Schema.define(version: 20170330211522) do
     t.index ["user_id"], name: "index_memberships_on_user_id", using: :btree
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text     "content",    null: false
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_messages_on_event_id", using: :btree
+    t.index ["user_id"], name: "index_messages_on_user_id", using: :btree
+  end
+
   create_table "reports", force: :cascade do |t|
     t.string   "content"
     t.boolean  "violation",        default: false
@@ -130,6 +140,8 @@ ActiveRecord::Schema.define(version: 20170330211522) do
   add_foreign_key "invites", "users"
   add_foreign_key "memberships", "events"
   add_foreign_key "memberships", "users"
+  add_foreign_key "messages", "events"
+  add_foreign_key "messages", "users"
   add_foreign_key "reports", "events"
   add_foreign_key "reports", "users"
   add_foreign_key "reports", "users", column: "reported_user_id"
