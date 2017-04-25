@@ -20,7 +20,6 @@
 #  updated_at        :datetime         not null
 #  password          :string
 #  memberships_count :integer          default("0")
-#  city_id           :integer
 #
 
 event:
@@ -36,7 +35,6 @@ event:
   price: 1
   sport_type: sport_type
   creator: foo
-  city: city
 
 private_event:
   name: Event
@@ -53,4 +51,3 @@ private_event:
   password: '1234'
   sport_type: sport_type
   creator: foo
-  city: city

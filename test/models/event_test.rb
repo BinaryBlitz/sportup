@@ -20,7 +20,6 @@
 #  updated_at        :datetime         not null
 #  password          :string
 #  memberships_count :integer          default("0")
-#  city_id           :integer
 #
 
 require 'test_helper'

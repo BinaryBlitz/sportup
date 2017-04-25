@@ -20,7 +20,6 @@
 #  updated_at        :datetime         not null
 #  password          :string
 #  memberships_count :integer          default("0")
-#  city_id           :integer
 #
 
 class Event < ApplicationRecord
@@ -30,7 +29,6 @@ class Event < ApplicationRecord
 
   belongs_to :creator, class_name: 'User'
   belongs_to :sport_type
-  belongs_to :city
 
   has_many :memberships, dependent: :destroy
   has_many :users, through: :memberships
@@ -43,7 +41,6 @@ class Event < ApplicationRecord
   geocoded_by :address
 
   scope :on_date, -> (date) { where(starts_at: (date.beginning_of_day)..(date.end_of_day)) }
-  scope :by_city, -> (city) { where(city: city).on_date(Date.today) }
   scope :past_events, -> { where('cast(starts_at as date) + ends_at < ?', Time.zone.now) }
   scope :by_location, -> (location) { near(location, SEARCH_RADIUS, units: :km) }
 

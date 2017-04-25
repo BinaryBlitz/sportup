@@ -57,7 +57,7 @@ class API::EventsController < API::APIController
       .require(:event)
       .permit(
         :name, :starts_at, :ends_at, :address, :description, :latitude, :public,
-        :longitude, :user_limit, :team_limit, :price, :sport_type_id, :city_id
+        :longitude, :user_limit, :team_limit, :price, :sport_type_id
       )
   end
 end

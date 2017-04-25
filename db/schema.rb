@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330211522) do
+ActiveRecord::Schema.define(version: 20170425154729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,8 +41,6 @@ ActiveRecord::Schema.define(version: 20170330211522) do
     t.datetime "updated_at",                       null: false
     t.string   "password"
     t.integer  "memberships_count", default: 0
-    t.integer  "city_id"
-    t.index ["city_id"], name: "index_events_on_city_id", using: :btree
     t.index ["creator_id"], name: "index_events_on_creator_id", using: :btree
     t.index ["sport_type_id"], name: "index_events_on_sport_type_id", using: :btree
   end
@@ -133,7 +131,6 @@ ActiveRecord::Schema.define(version: 20170330211522) do
     t.index ["voted_user_id"], name: "index_votes_on_voted_user_id", using: :btree
   end
 
-  add_foreign_key "events", "cities"
   add_foreign_key "events", "sport_types"
   add_foreign_key "events", "users", column: "creator_id"
   add_foreign_key "invites", "events"
