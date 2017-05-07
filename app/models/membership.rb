@@ -18,6 +18,9 @@ class Membership < ApplicationRecord
   validates :event, presence: true, uniqueness: { scope: :user }
   validate :team_number_is_valid
 
+  after_create :create_bot_membership
+  after_destroy :destroy_bot_membership
+
   def join(team_number)
     update!(team_number: team_number)
   end
@@ -27,6 +30,22 @@ class Membership < ApplicationRecord
   end
 
   private
+
+  def create_bot_membership
+    return unless event.chat_id.present?
+    TelegramBotMembership.create(
+      user: TelegramBotUser.find_or_create(user), from_app: true,
+      event: TelegramBotEvent.find_by_chat_id(event.chat_id)
+    )
+  end
+
+  def destroy_bot_membership
+    return unless event.chat_id.present? && user.telegram_id.present?
+    TelegramBotMembership.where(
+      event: TelegramBotEvent.find_by_chat_id(event.chat_id),
+      user: TelegramBotUser.find_by_telegram_id(user.telegram_id)
+    ).first.destroy
+  end
 
   def team_number_is_valid
     return unless team_number.present?
