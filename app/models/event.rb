@@ -20,6 +20,7 @@
 #  updated_at        :datetime         not null
 #  password          :string
 #  memberships_count :integer          default("0")
+#  chat_id           :string
 #
 
 class Event < ApplicationRecord
