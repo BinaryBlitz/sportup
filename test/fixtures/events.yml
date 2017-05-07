@@ -12,7 +12,7 @@
 #  user_limit        :integer          not null
 #  team_limit        :integer          not null
 #  public            :boolean          default("true")
-#  description       :text             not null
+#  description       :text
 #  price             :integer          not null
 #  sport_type_id     :integer
 #  creator_id        :integer
