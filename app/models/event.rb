@@ -49,7 +49,6 @@ class Event < ApplicationRecord
   validates :starts_at, presence: true
   validates :ends_at, presence: true
   validates :address, presence: true
-  validates :description, presence: true
   validates :latitude, inclusion: { in: -90..90 }
   validates :longitude, inclusion: { in: -180..180 }
   validates :user_limit, numericality: { greater_than: 1 }
