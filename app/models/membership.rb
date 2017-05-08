@@ -34,16 +34,16 @@ class Membership < ApplicationRecord
   def create_bot_membership
     return unless event.chat_id.present?
     TelegramBotMembership.create(
-      user: TelegramBotUser.find_or_create(user), from_app: true,
-      event: TelegramBotEvent.find_by_chat_id(event.chat_id)
+      user_id: TelegramBotUser.find_or_create(user).id, from_app: true,
+      event_id: TelegramBotEvent.find_by_chat_id(event.chat_id).id
     )
   end
 
   def destroy_bot_membership
     return unless event.chat_id.present? && user.telegram_id.present?
     TelegramBotMembership.where(
-      event: TelegramBotEvent.find_by_chat_id(event.chat_id),
-      user: TelegramBotUser.find_by_telegram_id(user.telegram_id)
+      event_id: TelegramBotEvent.find_by_chat_id(event.chat_id).id,
+      user_id: TelegramBotUser.find_by_telegram_id(user.telegram_id).id
     ).first.destroy
   end
 
