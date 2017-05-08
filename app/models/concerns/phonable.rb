@@ -3,7 +3,6 @@ module Phonable
 
   included do
     before_validation :normalize_phone_number
-    validates :phone_number, phone: true
   end
 
   private

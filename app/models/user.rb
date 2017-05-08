@@ -3,9 +3,9 @@
 # Table name: users
 #
 #  id               :integer          not null, primary key
-#  first_name       :string           not null
-#  last_name        :string           not null
-#  phone_number     :string           not null
+#  first_name       :string
+#  last_name        :string
+#  phone_number     :string
 #  avatar           :string
 #  api_token        :string
 #  created_at       :datetime         not null
@@ -13,6 +13,7 @@
 #  votes_count      :integer          default("0")
 #  violations_count :integer          default("0")
 #  telegram_id      :string
+#  username         :string
 #
 
 class User < ApplicationRecord
@@ -27,8 +28,8 @@ class User < ApplicationRecord
   has_many :reports, dependent: :destroy, foreign_key: :reported_user_id
   has_many :messages, dependent: :destroy
 
-  validates :first_name, :last_name, presence: true
-  validates :phone_number, uniqueness: true, presence: true, unless: 'telegram_id.present?'
+  validates :first_name, :last_name, presence: true, unless: 'telegram_id.present?'
+  validates :phone_number, phone: true, presence: true, uniqueness: true, unless: 'telegram_id.present?'
 
   has_secure_token :api_token
 
