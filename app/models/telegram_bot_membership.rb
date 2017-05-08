@@ -1,3 +1,3 @@
 class TelegramBotMembership < TelegramBot
-  table_name = 'memberships'
+  self.table_name = 'memberships'
 end

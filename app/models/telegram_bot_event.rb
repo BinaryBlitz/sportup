@@ -1,3 +1,3 @@
 class TelegramBotEvent < TelegramBot
-  table_name = 'events'
+  self.table_name = 'events'
 end
