@@ -26,10 +26,19 @@ class Invite < ApplicationRecord
     else
       update!(accepted: true)
       user.events << event
+      create_bot_guest
     end
   end
 
   private
+
+  def create_bot_guest
+    return unless event.chat_id.present?
+    TelegramBotGuest.create(
+      user: TelegramBotUser.find_or_create(user), from_app: true,
+      event: TelegramBotEvent.find_by_chat_id(event.chat_id)
+    )
+  end
 
   def not_member
     return unless event.users.include?(user)

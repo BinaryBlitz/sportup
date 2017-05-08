@@ -12,6 +12,7 @@
 #  updated_at       :datetime         not null
 #  votes_count      :integer          default("0")
 #  violations_count :integer          default("0")
+#  telegram_id      :string
 #
 
 class User < ApplicationRecord
@@ -27,7 +28,7 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
 
   validates :first_name, :last_name, presence: true
-  validates :phone_number, uniqueness: true
+  validates :phone_number, uniqueness: true, presence: true, unless: 'telegram_id.present?'
 
   has_secure_token :api_token
 

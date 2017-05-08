@@ -13,6 +13,6 @@ user.update!(api_token: 'foobar')
 event = Event.create!(
   name: 'Event', description: 'Description', address: 'Address',
   longitude: 0.0, latitude: 0.0, starts_at: 1.month.from_now, ends_at: '23:59',
-  user_limit: 2, team_limit: 2, price: 1, sport_type: sport_type, creator: user, city: city
+  user_limit: 2, team_limit: 2, price: 1, sport_type: sport_type, creator: user
 )
 
