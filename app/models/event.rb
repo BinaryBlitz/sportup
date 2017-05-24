@@ -44,6 +44,7 @@ class Event < ApplicationRecord
   scope :on_date, -> (date) { where(starts_at: (date.beginning_of_day)..(date.end_of_day)) }
   scope :past_events, -> { where('cast(starts_at as date) + ends_at < ?', Time.zone.now) }
   scope :by_location, -> (location) { near(location, SEARCH_RADIUS, units: :km) }
+  scope :next_week, -> { where(starts_at: (Date.today.beginning_of_day)..(1.week.from_now.end_of_day)) }
 
   validates :name, presence: true
   validates :starts_at, presence: true
