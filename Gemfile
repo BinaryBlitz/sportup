@@ -34,6 +34,7 @@ gem 'redis', '~> 3.0'
 gem 'phonelib', '~> 0.6'
 gem 'httparty', '~> 0.14'
 gem 'geocoder'
+gem 'telegram-bot-ruby'
 
 gem 'carrierwave', '~> 1.0'
 gem 'carrierwave-base64'
