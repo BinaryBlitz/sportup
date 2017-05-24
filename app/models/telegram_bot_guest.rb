@@ -11,7 +11,7 @@ class TelegramBotGuest < TelegramBot
   def send_participation_message
     send_message(
       event.chat.chat_id,
-      "#{I18n.t('guest')} #{user.username} #{I18n.t('entered_from_app')}. " \
+      "#{I18n.t('guest')} #{user.name} #{I18n.t('entered_from_app')}. " \
       "#{I18n.t('participates')} #{event.members_count}/#{event.user_limit}",
       event.chat.language
     )

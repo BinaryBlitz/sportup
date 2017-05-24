@@ -33,10 +33,10 @@ class Invite < ApplicationRecord
   private
 
   def create_bot_guest
-    return unless event.chat_id.present?
+    return unless event.chat_id
     TelegramBotGuest.create(
       user_id: TelegramBotUser.find_or_create(user).id, from_app: true,
-      event_id: TelegramBotEvent.find_by_chat_id(event.chat_id).id
+      event_id: TelegramBotChat.find_by(chat_id: event.chat_id).events.first.id
     )
   end
 
