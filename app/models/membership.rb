@@ -40,9 +40,9 @@ class Membership < ApplicationRecord
   end
 
   def destroy_bot_membership
-    return unless event.chat_id.present? && user.telegram_id.present?
+    return unless event.chat_id || user.telegram_id
     TelegramBotMembership.where(
-      event_id: TelegramBotEvent.find_by_chat_id(event.chat_id).id,
+      event_id: TelegramBotChat.find_by(chat_id: event.chat_id).events.first.id,
       user_id: TelegramBotUser.find_by_telegram_id(user.telegram_id).id
     ).first.destroy
   end
