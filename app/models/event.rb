@@ -26,8 +26,6 @@
 class Event < ApplicationRecord
   SEARCH_RADIUS = 30
 
-  after_create :attend
-
   belongs_to :creator, class_name: 'User'
   belongs_to :sport_type
 
@@ -39,12 +37,6 @@ class Event < ApplicationRecord
   has_many :reports, dependent: :destroy
   has_many :messages, dependent: :destroy
 
-  geocoded_by :address
-
-  scope :on_date, -> (date) { where(starts_at: (date.beginning_of_day)..(date.end_of_day)) }
-  scope :past_events, -> { where('cast(starts_at as date) + ends_at < ?', Time.zone.now) }
-  scope :by_location, -> (location) { near(location, SEARCH_RADIUS, units: :km) }
-
   validates :name, presence: true
   validates :starts_at, presence: true
   validates :ends_at, presence: true
@@ -55,6 +47,15 @@ class Event < ApplicationRecord
   validates :team_limit, numericality: { greater_than: 1 }
   validates :price, numericality: { greater_than_or_equal_to: 0 }
   validate :starts_before_ends
+
+  after_create :attend
+
+  scope :on_date, -> (date) { where(starts_at: (date.beginning_of_day)..(date.end_of_day)) }
+  scope :past_events, -> { where('cast(starts_at as date) + ends_at < ?', Time.zone.now) }
+  scope :by_location, -> (location) { near(location, SEARCH_RADIUS, units: :km) }
+  scope :next_week, -> { where(starts_at: (Date.today.beginning_of_day)..(1.week.from_now.end_of_day)) }
+
+  geocoded_by :address
 
   def verify(user, password)
     return true if public? || user == creator || member(user)
