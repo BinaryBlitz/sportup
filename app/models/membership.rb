@@ -32,7 +32,7 @@ class Membership < ApplicationRecord
   private
 
   def create_bot_membership
-    return unless event.chat_id.present?
+    return unless event.chat_id
     TelegramBotMembership.create(
       user_id: TelegramBotUser.find_or_create(user).id, from_app: true,
       event_id: TelegramBotChat.find_by(chat_id: event.chat_id).events.first.id
